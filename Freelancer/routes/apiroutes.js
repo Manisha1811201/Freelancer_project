@@ -5,7 +5,8 @@ const postController=require("../Server/Post/postController");
 const projectController=require("../Server/Project/projectController");
 const techController=require("../Server/Technology/techController");
 const viewController=require("../Server/Review/reviewController");
-const customerController=require("../Server/Customer/customerController")
+const customerController=require("../Server/Customer/customerController");
+const userController=require("../Server/User/userController");
 
 //postcontroller routing
 router.post("/post/add",postController.add)
@@ -37,5 +38,11 @@ router.post("/view/update",viewController.updateData)
 
 //customercontroller routing
 router.post("/customer/register",customerController.register)
+router.post("/cust/getall",customerController.getall)
+router.post("/cust/getsingle",customerController.getsingleData)
+router.post("/cust/update",customerController.updateData)
+
+//userController routing
+router.post("/user/login",userController.login)
 
 module.exports=router
