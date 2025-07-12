@@ -1,5 +1,7 @@
 const user = require("./userModel")
 const bcrypt = require("bcrypt")
+const jwt=require("jsonwebtoken");
+const privateKey="privateKey123"
 
 login = (req,res) =>{
     let validationError = []
@@ -30,10 +32,18 @@ login = (req,res) =>{
             else{
                 bcrypt.compare(req.body.password,userData.password,function(err,result){
                     if(result){
+                        var payload={
+                            name:userData.name,
+                            email:userData.email,
+                            userType:userData.userType,
+                            userId:userData._id
+                        }
+                        var token=jwt.sign(payload,privateKey)
                         res.json({
                             status:200,
                             success:true,
                             message:"Login successfully",
+                            tokenData:token,
                             data:userData
                         })
                     }
